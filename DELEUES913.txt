@@ -1,0 +1,390 @@
+DELEUES913
+!
+configure terminal
+!
+clock timezone GMT 0
+service timestamps debug datetime localtime show-timezone msec
+service timestamps log datetime localtime show-timezone msec
+service password-encryption
+service tcp-keepalives-in
+service tcp-keepalives-out
+service nagle
+no service pad
+no service finger
+no service udp-small-servers
+no service tcp-small-servers
+no service config
+service compress-config
+no ip domain-lookup
+no ip bootp server
+no ip finger
+no ip icmp redirect
+no ip http server
+no ip http secure-server
+crypto key zeroize rsa
+cdp run
+no macro auto monitor
+mls qos
+!
+hostname DELEUES913
+!
+!
+switch 1 provision c9300-24ux
+switch 2 provision c9300-24ux
+!
+no ip routing
+no ip source-route
+!
+login on-success log
+!
+udld enable
+!
+lldp run
+!
+no device-tracking logging theft
+!
+!
+license boot level network-essentials addon dna-essentials
+!
+!
+diagnostic bootup level minimal
+!
+spanning-tree mode rapid-pvst
+no spanning-tree uplinkfast
+no spanning-tree backbonefast
+spanning-tree loopguard default
+spanning-tree portfast bpduguard default
+spanning-tree extend system-id
+spanning-tree VLAN 1-999 priority 16384
+!
+memory free low-watermark processor 141154
+!
+no vstack
+!
+vtp version 2
+ vtp pruning
+ vtp domain DELEU001
+ vtp mode client
+!
+redundancy
+ mode sso
+!
+!
+transceiver type all
+ monitoring
+!
+interface Port-channel1
+ description U;DELEUVI610 PC19
+ switchport mode dynamic desirable
+!
+interface TenGigabitEthernet1/0/1
+ description ;Printer
+ switchport access vlan 701
+ switchport mode access
+ no cdp enable
+ no snmp trap link-status
+ auto qos trust dscp
+ no lldp transmit
+ spanning-tree portfast
+ no shut
+!
+interface TenGigabitEthernet1/0/2
+ description ;Printer
+ switchport access vlan 701
+ switchport mode access
+ no cdp enable
+ no snmp trap link-status
+ auto qos trust dscp
+ no lldp transmit
+ spanning-tree portfast
+ no shut
+!
+interface range TenGigabitEthernet1/0/3 - 8 
+ description ;GI-D user
+ switchport access vlan 500
+ switchport mode access
+ no cdp enable
+ no snmp trap link-status
+ auto qos trust dscp
+ no lldp transmit
+ spanning-tree portfast
+! 
+interface range TenGigabitEthernet1/0/9 - 15
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+!
+interface TenGigabitEthernet1/0/16
+ description E;DELEUWP003 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet1/0/17
+ description E;DELEUWP006 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet1/0/18
+ description E;DELEUWP009 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet1/0/19
+ description E;DELEUWP0011 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet1/0/20
+ description E;DELEUWP013 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet1/0/21
+ description E;DELEUWP015 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet1/0/22
+ description E;DELEUWP017 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet1/0/23
+ description E;DELEUWP019 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet1/0/24
+ description E;DELEUWP021 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet1/1/1
+ description U;DELEUVI610 Tw1/0/22
+ switchport mode dynamic desirable
+ auto qos trust dscp
+ channel-group 1 mode desirable
+!
+interface range TenGigabitEthernet1/1/2 - 8
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+!
+interface TenGigabitEthernet2/0/1
+ description ;Printer
+ switchport access vlan 701
+ switchport mode access
+ no cdp enable
+ no snmp trap link-status
+ auto qos trust dscp
+ no lldp transmit
+ spanning-tree portfast
+ no shut
+!
+interface TenGigabitEthernet2/0/2
+ description ;Printer
+ switchport access vlan 701
+ switchport mode access
+ no cdp enable
+ no snmp trap link-status
+ auto qos trust dscp
+ no lldp transmit
+ spanning-tree portfast
+ no shut
+!
+interface range TenGigabitEthernet2/0/3 - 8
+ description ;GI-D user
+ switchport access vlan 500
+ switchport mode access
+ no cdp enable
+ no snmp trap link-status
+ auto qos trust dscp
+ no lldp transmit
+ spanning-tree portfast
+! 
+interface range TenGigabitEthernet2/0/9 - 14
+ switchport mode access
+ switchport access vlan 999
+ shutdown
+!
+interface TenGigabitEthernet2/0/15
+ description E;DELEUWP002 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet2/0/16
+ description E;DELEUWP004 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet2/0/17
+ description E;DELEUWP007 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet2/0/18
+ description E;DELEUWP010 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet2/0/19
+ description E;DELEUWP012 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet2/0/20
+ description E;DELEUWP014 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet2/0/21
+ description E;DELEUWP016 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet2/0/22
+ description E;DELEUWP018 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet2/0/23
+ description E;DELEUWP020 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet2/0/24
+ description E;DELEUWP022 eth0
+ switchport access vlan 852
+ switchport mode access
+ no cdp enable
+ lldp receive
+ no snmp trap link-status
+ auto qos trust dscp
+ spanning-tree portfast
+!
+interface TenGigabitEthernet2/1/1
+ description U;DELEUVI610 TG2/0/22
+ switchport mode dynamic desirable
+ auto qos trust dscp
+ channel-group 1 mode desirable
+!
+interface range TenGigabitEthernet2/1/2 - 8
+switchport mode access
+switchport access vlan 999
+shutdown
+!
+!
+interface Vlan1
+ ip address 134.145.0.209 255.255.255.224
+ no ip redirects
+!
+ip default-gateway 134.145.0.193
+!
+ip forward-protocol nd
+no ip http server
+ip http authentication local
+no ip http secure-server
+ip ftp source-interface Vlan1
+ip tftp source-interface Vlan1
+ip tacacs source-interface Vlan1
+!
+!
+!
+!
+control-plane
+ service-policy input system-cpp-policy
+!
+!
+mac address-table aging-time 14400
+!
+!
+end
+!
+
